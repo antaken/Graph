@@ -5,7 +5,7 @@ public class Graph_main {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Graph_view graph = new Graph_view(1);
-		graph.setBounds(5,5,655,455);
+		graph.setBounds(5,5,720,500);
 		graph.setVisible(true);
 	}
 

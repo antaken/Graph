@@ -8,6 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -32,13 +34,25 @@ public class Graph_view extends Frame implements ActionListener,WindowListener{
 		setLayout(new FlowLayout(FlowLayout.CENTER));
 		
 		
-		data.addValue(300, "USA", "2005");
-		data.addValue(500, "USA", "2006");
-		data.addValue(120, "USA", "2007");
-		
-		data.addValue(200, "China", "2005");
-		data.addValue(400, "China", "2006");
-		data.addValue(320, "China", "2007");
+		int id,ton;
+		String name,year;
+		ResultSet rs;
+		MySQL mysql = new MySQL();
+		rs = mysql.selectAll();
+
+		try {
+			while(rs.next()){
+			    id = rs.getInt("id");
+			    name = rs.getString("name");
+			    year = rs.getString("year");
+			    ton = rs.getInt("ton");
+			    
+			    data.addValue(ton, name, year);
+			}  
+			} catch (SQLException ee) {
+				// TODO Auto-generated catch block
+				ee.printStackTrace();
+			}
 		
 		if(a==1) {
 		
@@ -120,12 +134,12 @@ public class Graph_view extends Frame implements ActionListener,WindowListener{
 		if(e.getSource() == button1) {
 			dispose();
 			Graph_view graph = new Graph_view(1);
-			graph.setBounds(5,5,655,455);
+			graph.setBounds(5,5,720	,500);
 		  	graph.setVisible(true);
 		}else if(e.getSource() == button2) {
 			dispose();
 			Graph_view graph = new Graph_view(2);
-			graph.setBounds(5,5,655,455);
+			graph.setBounds(5,5,720,500);
 			graph.setVisible(true);
 		}
 		
